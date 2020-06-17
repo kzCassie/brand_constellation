@@ -1,0 +1,7 @@
+certifi==2020.4.5.2
+chardet==3.0.4
+idna==2.9
+-e git+https://github.com/kzCassie/instaloader.git@27340f87be2bb2efa9e04090952aa4d7755bea58#egg=instaloader
+redis==2.10.6
+requests==2.23.0
+urllib3==1.25.9
