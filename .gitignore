@@ -1,0 +1,7 @@
+.DS_Store
+log/
+data/
+input/
+env/
+code/__pycache__/
+

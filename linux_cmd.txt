@@ -1,0 +1,48 @@
+Brand Constellation Project Linux Commands
+NYUSH Research
+
+------ AWS -----
+SSH
+Chmod 400  ~/.ssh/Kehang_key.pem
+ssh -i ~/.ssh/Kehang_key.pem ubuntu@18.163.192.62
+sftp -i ~/.ssh/Kehang_key.pem ubuntu@18.162.246.47
+
+Setting up EC2
+<install necessary packages in EC2 while in the ssh session>
+sudo apt update
+sudo apt install python3-pip
+pip3 install instaloader
+
+operations on EC2 instances
+ps aux|grep python3
+ls -la
+sudo kill PID
+sudo chmod -R a+w log/
+rm -r data
+
+SSM
+Choose: AWS-RunPowerShellScript
+
+RDS Credentials
+UN: admin
+PW: 00000000
+
+
+------ Azure ------
+export FACE_SUBSCRIPTION_KEY=3433530f73a54543b70fe5bc1cc4f7c6
+
+
+------ Local Machine -------
+crontab -l
+crontab -e
+
+
+
+
+------ Other ------
+cd /home/ubuntu
+cd ig/code
+python3 post.py &
+kill -INT 1
+
+get-service
