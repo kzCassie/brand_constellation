@@ -1,5 +1,4 @@
 ''' Rotates IP and drives post.py, profile.py to collect IG data. '''
-
 import redis
 import random
 import sys
@@ -9,8 +8,9 @@ from instaloader.exceptions import TooManyRequestsException, ProxyInvalidExcepti
 from requests.exceptions import ProxyError
 
 from global_variables import *
+from common import *
 from post import post_crawler
-
+from profile import profile_crawler
 
 
 def get_proxy_from_pool():
@@ -35,29 +35,68 @@ def get_proxy_from_pool():
 
 
 def drive_post_crawler(vm_rank,vm_total):
+    '''Sets system proxy and calls post_crawler in post.py'''
+    make_dir()
     while True:
         try:
             # set system proxy
-            # proxy = get_proxy_from_pool()
-            proxy = "188.165.141.114:3129"
+            proxy = get_proxy_from_pool()
             os.environ['http_proxy']  = "http://"  + proxy 
             os.environ['HTTP_PROXY']  = "http://"  + proxy
             os.environ['https_proxy'] = "https://" + proxy
             os.environ['HTTPS_PROXY'] = "https://" + proxy
+            write_log("Switching to system proxy: "+proxy,POST_LOG)
             print("Using system proxy: " + proxy)
             # call post_crawler
             post_crawler(vm_rank, vm_total)
+            write_proxy_log(proxy,"Valid",PROXY_LOG)
         except (TooManyRequestsException) as e:
+            write_proxy_log(proxy,"TooManyRequestsException",PROXY_LOG)
             print("TooManyRequestsException caught by driver.py")
         except ProxyInvalidException as e:
+            write_proxy_log(proxy,"ProxyInvalidException",PROXY_LOG)
+            print("ProxyInvalidException caught by driver.py")
+
+def drive_profile_crawler(vm_rank,vm_total):
+    '''Sets system proxy and calls profile_crawler in profile.py'''
+    make_dir()
+    while True:
+        try:
+            # set system proxy
+            proxy = get_proxy_from_pool()
+            os.environ['http_proxy']  = "http://"  + proxy 
+            os.environ['HTTP_PROXY']  = "http://"  + proxy
+            os.environ['https_proxy'] = "https://" + proxy
+            os.environ['HTTPS_PROXY'] = "https://" + proxy
+            write_log("Switching to system proxy: "+proxy,PROF_LOG)
+            print("Using system proxy: " + proxy)
+            # call profile_crawler
+            profile_crawler(vm_rank, vm_total)
+            write_proxy_log(proxy,"Valid",PROXY_LOG)
+        except (TooManyRequestsException) as e:
+            write_proxy_log(proxy,"TooManyRequestsException",PROXY_LOG)
+            print("TooManyRequestsException caught by driver.py")
+        except ProxyInvalidException as e:
+            write_proxy_log(proxy,"ProxyInvalidException",PROXY_LOG)
             print("ProxyInvalidException caught by driver.py")
 
 
-
 if __name__ == '__main__':
-    VM_RANK  = int(sys.argv[1])
-    VM_TOTAL = int(sys.argv[2])
-    drive_post_crawler(VM_RANK,VM_TOTAL)
+    TASK     = sys.argv[1]
+    VM_RANK  = int(sys.argv[2])
+    VM_TOTAL = int(sys.argv[3])
+
+    '''
+    VM_RANK  - The rank number of *this* machine among all (remote) machines
+    VM_TOTAL - Total number of (remote) machines crawling using the INPUT.csv
+    For example, if VM_TOTAL = 20 and VM_RANK = 3, then this machine will only crawl
+                data for influencers with idx 3, 23, 43, 63, ...
+    '''
+    if TASK == 'post':
+        drive_post_crawler(VM_RANK,VM_TOTAL)
+    elif TASK == 'profile':
+        drive_profile_crawler(VM_RANK,VM_TOTAL)
+
 
 
 

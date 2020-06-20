@@ -19,9 +19,7 @@ Code to download IG post and profile data using IP rotation.
 
 ___
 ### Todos
-1. profile.py
-   * Fix global_variable references in profile.py
-2. post.py
+1. post.py
    * Improve exception handling and error log writing format
 2. driver.py
    * Currently only have the driver function for post_crawler, need to add the driver function for profile_crawler

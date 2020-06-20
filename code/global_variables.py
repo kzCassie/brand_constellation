@@ -11,7 +11,11 @@ ERR_CNT = 0
 ERR_MAX = 5 # tolerance of errs
 
 # INPUT INFLUENCER CSV #
-INPUT       = f"{path}/input/20_brand_list.csv"
+INPUT       = f"{path}/input/20brand_1st_round.csv"
+
+# TIME RANGE OF POST TO BE COLLECTED #
+START_DATE = "2017-01-01"
+END_DATE   = None
 
 # POST CRAWLER GLOBAL VAR #
 POST_LOG    = f"{path}/log/log1.log"
@@ -30,20 +34,18 @@ PROF_LOG    = f"{path}/log/log2.log"
 PROF_BR_PT  = f"{path}/log/breakpoint2.txt"
 PROF_FAIL   = f"{path}/log/fail2.txt"
 PROF_DATA   = f"{path}/data/profile.csv"
+PROF_PIC    = f"{path}/data/profile_pic/"
 PROF_FIELD  = ['user_idx','user', 'timestamp', 'is_private', 
             'mediacount', 'followers', 'followees', 'external_url',
             'biography', 'is_verified', 'fullname', 'profile_pic']
+
+# DRIVER GLOBAL VAR #
+PROXY_LOG   = f"{path}/log/proxy.csv"
 
 # CREDENTIALS OF REDIS #
 REDIS_HOST  = '127.0.0.1'
 REDIS_PORT  = 6379
 REDIS_PASSWORD = ''
-
-
-# redis host
-# REDIS_HOST = env.str('REDIS_HOST', '127.0.0.1')
-# REDIS_PORT = env.int('REDIS_PORT', 6379)
-# REDIS_PASSWORD = env.str('REDIS_PASSWORD', None)
 
 
 

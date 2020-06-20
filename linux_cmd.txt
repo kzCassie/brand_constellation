@@ -29,7 +29,7 @@ PW: 00000000
 
 
 ------ Azure ------
-export FACE_SUBSCRIPTION_KEY=3433530f73a54543b70fe5bc1cc4f7c6
+export FACE_SUBSCRIPTION_KEY=<subscription key>
 
 
 ------ Local Machine -------
