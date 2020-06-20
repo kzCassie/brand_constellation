@@ -17,14 +17,12 @@ Code to download IG post and profile data using IP rotation.
 * _sftp_script.sh: template shell script to ssh/sftp to remote servers in batch_
 * _requirements.txt: pip virtual environment requirements_
 
+### Updates
+20200620 - Improve code structure, error handling and and file writing
+
 ___
 ### Todos
-1. post.py
-   * Improve exception handling and error log writing format
-2. driver.py
-   * Currently only have the driver function for post_crawler, need to add the driver function for profile_crawler
-   * Potentially add functions to obtain proxy IPs in other ways
-  
-
-
-
+1. Add other methods to get more proxy
+2. Maintain usable proxy IPs:
+	- Update proxypool by removing proxies that are not valid for fetching IG data.
+	- Keep proxy that are usable, avoid using them too frequently
